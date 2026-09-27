@@ -1,0 +1,7 @@
+num = int(input())
+years = int(num/365)
+weeks = int((num%365)/7)
+days = num - (years*365 + weeks*7)
+print(years)
+print(weeks)
+print(days)
