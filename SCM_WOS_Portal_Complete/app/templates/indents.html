@@ -1,0 +1,30 @@
+{% for indent in indents %}
+  {# Get the first/latest tender record associated with this indent #}
+  {% set tender = indent.tenders[0] if indent.tenders else (indent.tender if indent.tender else None) %}
+  <tr>
+    <td>{{ indent.indent_no }}</td>
+    <td>{{ indent.asset }}</td>
+    <td>{{ indent.hpo }}</td>
+    <td>{{ indent.section }}</td>
+    <td>
+      {% if indent.dealing_officer %}
+        {{ indent.dealing_officer.full_name }}
+      {% else %}
+        <span class="text-muted">Unassigned</span>
+      {% endif %}
+    </td>
+    <td>{{ indent.indent_type or indent.indent_status or indent.status }}</td>
+    <td>{{ indent.pr_no or '' }}</td>
+
+    <!-- Pull tender details from the related Tender object -->
+    <td>{{ (tender.tender_no if tender else '') or '-' }}</td>
+    <td>{{ (tender.tender_mode if tender else '') or '-' }}</td>
+    <td>{{ (tender.tender_status if tender else '') or '-' }}</td>
+
+    <td><a href="/indent/{{ indent.indent_no }}/edit" class="btn">Update</a></td>
+  </tr>
+{% else %}
+  <tr>
+    <td colspan="10">No indents found.</td>
+  </tr>
+{% endfor %}

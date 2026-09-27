@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block heading %}All Indents - Detailed View{% endblock %}
+
+{% block content %}
+<section class="panel">
+  <div style="overflow-x: auto;">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Indent No.</th>
+          <th>DISHA File Ref.</th>
+          <th>HPO</th>
+          <th>Asset</th>
+          <th>Section</th>
+          <th>Dealing Officer</th>
+          <th>Description</th>
+          <th>PR No.</th>
+          <th>PR Type</th>
+          <th>PR Value</th>         
+          <th>CPA</th>
+          <th>Tender No.</th>
+          <th>Tender Mode</th>
+          <th>Tender Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for indent in indents %}
+        {# Safely resolve tender regardless of whether it's a list or single object #}
+        {% set tender = (indent.tenders[0] if indent.tenders else None) if indent.tenders is defined else indent.tender %}
+        
+        
+        
+        
+        <tr>
+          <td><strong>{{ indent.indent_no }}</strong></td>
+          <td>{{ indent.disha_file_no or '-' }}</td>
+          <td>{{ indent.hpo or '-' }}</td>
+          <td>{{ indent.asset or '-' }}</td>
+          <td>{{ indent.section or '-' }}</td>
+          <td>
+            {% if indent.dealing_officer %}
+              {{ indent.dealing_officer.user_name }}
+            {% elif indent.dealing_officer_id %}
+              User #{{ indent.dealing_officer_id }}
+            {% else %}
+              <span class="text-muted">Unassigned</span>
+            {% endif %}
+          </td>
+          <td>{{ indent.description or '-' }}</td>
+          <td>{{ indent.pr_no or '-' }}</td>
+          <td>{{ indent.pr_type or '-' }}</td>
+          <td>{{ indent.currency or 'INR' }} {{ indent.pr_value or '0.00' }}</td>       
+          <td>{{ indent.cpa or '-' }}</td>
+
+          <!-- Corrected Tender Fields -->
+          <td>{{ (tender.tender_no if tender else indent.tender_no) or '-' }}</td>
+          <td>{{ (tender.tender_mode if tender else indent.tender_mode) or '-' }}</td>
+          <td>{{ (tender.tender_status if tender else indent.tender_status) or '-' }}</td>
+        
+        </tr>
+        {% else %}
+        <tr>
+          <td colspan="14" style="text-align: center;">No indents found in database.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+
+      
+     <!-- Move inside table rows in view_indents.html / search_indent.html -->
+
+
+      </tr>
+    </table>
+  </div>
+</section>
+{% endblock %}

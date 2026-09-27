@@ -1,0 +1,496 @@
+/* ==========================================
+   ONGC Corporate Theme Variables & Base Styles
+   ========================================== */
+:root {
+  /* ONGC Brand Palette */
+  --ongc-red: #901B1E;
+  --ongc-blue:  #3c68ab;
+  --ongc-red-hover: #751417;
+  --ongc-yellow: #FDB813;
+  --ongc-yellow-muted: rgba(253, 184, 19, 0.15);
+  
+  /* Modern Neutral System */
+  --sidebar-bg: #4c5b81;
+  --sidebar-hover: hsl(0, 76%, 23%);
+  --main-bg: #F8FAFC;
+  --card-bg: #FFFFFF;
+  --text-main: #1E293B;
+  --text-muted: #64748B;
+ 
+  --border-color: #E2E8F0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, 'Segoe UI', Arial, sans-serif;
+  background: var(--main-bg);
+  color: var(--text-main);
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ==========================================
+   Sidebar Navigation (ONGC Styled)
+   ========================================== */
+.sidebar {
+  width: 255px;
+  background: var(--sidebar-bg);
+  color: #fff;
+  position: fixed;
+  inset: 0 auto 0 0;
+  padding: 22px 14px;
+  display: flex;
+  flex-direction: column;
+  border-right: 3px solid var(--ongc-red);
+}
+
+.brand {
+  font-size: 40px;
+  font-weight: 900;
+  padding: 4px 12px 20px;
+  color: #FFFFFF;
+}
+
+.brand {
+  font-size: 40px;
+  font-weight: 900;
+  padding: 4px 12px 20px;
+  color: #FFFFFF;
+}
+
+.brand span {
+  color: var(--ongc-yellow);
+}
+
+.brand small {
+  display: block;
+  font-size: 20px;
+  color: #94A3B8;
+  margin-top: 4px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.sidebar nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #CBD5E1;
+  text-decoration: none;
+  padding: 11px 12px;
+  border-radius: 8px;
+  margin: 3px 0;
+  font-size: 20px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.sidebar nav a:hover {
+  background: var(--sidebar-hover);
+  color: #FFFFFF;
+}
+
+.sidebar nav a.active {
+  background: var(--ongc-yellow-muted);
+  color: #FFFFFF;
+  border-left: 4px solid var(--ongc-yellow);
+}
+
+/* Userbox Badge */
+.userbox {
+  margin-top: auto;
+  background: none;
+  border: 1px solid #f7f8fa;
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 20px;
+}
+
+.userbox span {
+  color: #94A3B8;
+  display: block;
+}
+
+.userbox a {
+  color: var(--ongc-yellow);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.userbox a:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================
+   Main Content Layout & Header
+   ========================================== */
+.content {
+  margin-left: 255px;
+  width: calc(100% - 255px);
+  padding: 24px 30px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+  padding-bottom: 12px;
+  border-bottom: 5px solid var(--border-color);
+  border-color: #751417;
+}
+
+h1 {
+  margin: 0;
+  font-size: 24px;
+  color: var(--text-main);
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+h2, h3 {
+  margin-top: 0;
+  color: var(--text-main);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.main-header {
+  color: var(--ongc-red);
+  font-size: xx-large;
+}
+
+/* ==========================================
+   KPI Cards & Panels
+   ========================================== */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Increase 250px to 300px+ for wider cards */
+  gap: 15px;
+  margin-bottom: 22px;
+
+}
+
+.cards.small {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.05);
+  border: 1px solid var(--border-color);
+  border-top: 4px solid var(--ongc-blue); /* ONGC Red Accent */
+}
+
+.card span {
+  display: block;
+  color: var(--text-muted);
+  font-size: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card b {
+  font-size: 28px;
+  display: block;
+  margin-top: 7px;
+  color: var(--ongc-red);
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.panel {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.03);
+}
+
+.panel canvas {
+  max-height: 300px;
+}
+
+/* ==========================================
+   Data Tables
+   ========================================== */
+.tablewrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+th {
+  background: #F1F5F9;
+  color: #334155;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+}
+
+tr:hover td {
+  background-color: #F8FAFC;
+}
+
+/* ==========================================
+   Forms, Inputs & Buttons
+   ========================================== */
+.toolbar {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.toolbar input,
+.toolbar select {
+  max-width: 320px;
+}
+
+.formgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+label {
+  font-size: 20px;
+  color: #334155;
+  font-weight: 600;
+}
+
+input, select, textarea {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  border: 1px solid #CBD5E1;
+  border-radius: 7px;
+  padding: 10px;
+  background: #fff;
+  color: #0F172A;
+  font-size: 20px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--ongc-red);
+  box-shadow: 0 0 0 3px rgba(144, 27, 30, 0.15);
+}
+
+textarea {
+  min-height: 85px;
+  resize: vertical;
+}
+
+.wide {
+  grid-column: 1 / -1;
+}
+
+.btn {
+  display: inline-block;
+  border: 1px solid #CBD5E1;
+  border-radius: 7px;
+  padding: 10px 18px;
+  text-decoration: none;
+  color: var(--text-main);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 20px;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  background: #F1F5F9;
+}
+
+/* Primary Action Buttons (ONGC Red Theme) */
+.btn.primary {
+  background: var(--ongc-blue);
+  color: #FFFFFF;
+  border: 1px solid var(--ongc-blue);
+}
+
+.btn.primary:hover {
+  background: var(--ongc-red-hover);
+  border-color: var(--ongc-red-hover);
+}
+
+/* Secondary Action Buttons (ONGC Yellow Theme) */
+.btn.secondary {
+  background: var(--ongc-yellow);
+  color: #0F172A;
+  border: 1px solid var(--ongc-yellow);
+}
+
+.btn.secondary:hover {
+  background: #E09F15;
+}
+
+/* ==========================================
+   Alerts & Notifications
+   ========================================== */
+.alert {
+  padding: 11px 14px;
+  border-radius: 8px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.success {
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #BBF7D0;
+}
+
+.danger {
+  background: #FEE2E2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+}
+
+.notice {
+  background: #EFF6FF;
+  border-left: 4px solid #3B82F6;
+  padding: 12px;
+  margin-bottom: 15px;
+}
+
+.checklist {
+  line-height: 2;
+}
+
+/* ==========================================
+   Login Page Design
+   ========================================== */
+.login {
+  display: grid;
+  place-items: center;
+  /*min-height: 80vh;
+ background: linear-gradient(135deg, var(--sidebar-bg), var(--ongc-red));*/
+  background: linear-gradient(to top left, #2a2d3e, #460de1);
+  min-height: 100vh;
+}
+
+.login-card {
+  width: 580px;
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  border-top: 6px solid var(--ongc-yellow);
+}
+
+.login-card .brand {
+  color: var(--sidebar-bg);
+  padding-left: 0;
+  margin-bottom: 20px;
+}
+
+.login-card form {
+  display: grid;
+  gap: 15px;
+}
+
+.login-card button {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 25px;
+  font-weight: 600;
+  color: #FFFFFF;
+  background: var(--ongc-blue);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: background 0.2s ease;
+}
+
+.login-card button:hover {
+  background: var(--ongc-red-hover);
+}
+
+/* ==========================================
+   Responsive Breakpoints
+   ========================================== */
+@media (max-width: 1000px) {
+  .sidebar {
+    width: 210px;
+  }
+  .content {
+    margin-left: 210px;
+    width: calc(100% - 210px);
+  }
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+  .formgrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    height: auto;
+  }
+  .app {
+    display: block;
+  }
+  .content {
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+  }
+  .sidebar nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .userbox {
+    display: none;
+  }
+  .formgrid {
+    grid-template-columns: 1fr;
+  }
+  .login-card {
+    width: 90%;
+    padding: 25px;
+  }
+}
+.img{
+    height: 90px;
+    width: 90px;
+}

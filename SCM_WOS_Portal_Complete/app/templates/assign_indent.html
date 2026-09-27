@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block heading %}Assign Indent{% endblock %}
+
+{% block content %}
+
+<script src="{{ url_for('static', filename='js/app.js') }}?v=1.0"></script>
+
+<section class="panel">
+<form id="assignForm" class="formgrid" method="POST">
+    <label>Asset
+        <select name="asset" required>
+            <option value="" disabled selected>-- Select Asset --</option>
+            <option value="MH Asset">MH Asset</option>
+            <option value="B&S & NH Asset">B&S & NH Asset</option>
+        </select>
+    </label>
+
+    <label>HPO
+        <select name="hpo" required>
+            <option value="" disabled selected>-- Select HPO --</option>
+            <option value="HPO-1">HPO-1</option>
+            <option value="HPO-2">HPO-2</option>
+        </select>
+    </label>
+
+    <label>Indent No.
+        <input name="indent_no" type="number" required>
+    </label>
+
+    <label>DISHA File No.
+        <input name="disha_file_no" required>
+    </label>
+
+    <label>Indent Assign Date
+        <input type="date" name="assignment_date" id="assignment_date" required>
+    </label>
+
+    <label class="wide">Indent Description
+        <textarea name="description" required></textarea>
+    </label>
+
+    <label>Indenting Section
+        <select name="section" required>
+            <option value="" disabled selected>-- Select Section --</option>
+            <option value="Maintenance">Maintenance</option>
+            <option value="Surface">Surface</option>
+            <option value="Chemistry">Chemistry</option>
+            <option value="HSE">HSE</option>
+            <option value="HR">HR</option>
+            <option value="Infocom">Infocom</option>
+            <option value="SPM">SPM</option>
+            <option value="ATSM">ATSM</option>
+            <option value="AIMS-IMR">AIMS-IMR</option>
+            <option value="AIMSOMG">AIMS-OMG</option>
+            <option value="AIMSIMR">IMR</option>
+            <option value="IPEOT">IPEOT</option>
+            <option value="PLINE">PLINE</option>
+        </select>
+    </label>
+    
+    <label>Indenting Type
+        <select name="indent_type" required>
+            <option value="" disabled selected>-- Select Type --</option>
+            <option value="NewIndent">NewIndent</option>
+            <option value="PostContract">PostContract</option>
+        </select>
+    </label>
+
+    <label>Dealing Officer
+        <select name="dealing_officer_id" id="dealing_officer" class="form-select" required>
+        <option value="">-- Select Dealing Officer --</option>
+        {% for officer in officers %}
+        <option value="{{ officer.user_id }}">{{ officer.user_name }}</option>
+        {% endfor %}
+       </select>
+    </label>
+
+    <button type="submit" class="btn primary">Assign Indent</button>
+</form>
+</section>
+
+
+
+
+
+
+<div id="msg"></div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Automatically set default selection to today's date (YYYY-MM-DD)
+    const dateInput = document.getElementById('assignment_date');
+    if (dateInput && !dateInput.value) {
+        dateInput.value = new Date().toISOString().split('T')[0];
+    }
+
+    const form = document.getElementById('assignForm');
+    const msgDiv = document.getElementById('msg');
+
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = Object.fromEntries(new FormData(form));
+
+        try {
+            const res = await fetch('/api/indents', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+
+            const data = await res.json();
+            
+            if (res.ok && data.ok) {
+                msgDiv.innerHTML = `<div class="alert success">${data.message || 'Indent assigned successfully.'}</div>`;
+                form.reset();
+                if (dateInput) dateInput.value = new Date().toISOString().split('T')[0];
+            } else {
+                const errorMsg = data.error || data.message || 'Could not assign indent.';
+                msgDiv.innerHTML = `<div class="alert danger">${errorMsg}</div>`;
+            }
+        } catch (err) {
+            msgDiv.innerHTML = '<div class="alert danger">An unexpected network error occurred.</div>';
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% extends "base.html" %}{% block heading %}Security Deposit / PBG / EMD Tracking{% endblock %}
+{% block content %}<section class="panel"><div class="cards small"><div class="card"><span>90-day Alerts</span><b id="alert90">0</b></div><div class="card"><span>60-day Alerts</span><b id="alert60">0</b></div><div class="card"><span>30-day Alerts</span><b id="alert30">0</b></div></div>
+<table id="instrumentTable"><thead><tr><th>Category</th><th>Supplier</th><th>Contract/Tender</th><th>Type</th><th>Amount</th><th>Validity</th><th>Days</th><th>Status</th></tr></thead><tbody></tbody></table></section>{% endblock %}
+{% block scripts %}<script>loadAlerts();loadInstruments();</script>{% endblock %}
